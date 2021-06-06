@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:unit_converter/category.dart';
 
-// TODO: Check if we need to import anything
+class CategoryProps {
+  final String name;
+  final Color color;
 
-// TODO: Define any constants
+  const CategoryProps({required this.name, required this.color});
+}
 
 /// Category Route (screen).
 ///
@@ -12,41 +16,52 @@ import 'package:flutter/material.dart';
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
-  const CategoryRoute({Key? key}) : super(key: key);
+  const CategoryRoute({Key? key, this.backgroundColor}) : super(key: key);
 
-  static const _categoryNames = <String>[
-    'Length',
-    'Area',
-    'Volume',
-    'Mass',
-    'Time',
-    'Digital Storage',
-    'Energy',
-    'Currency',
+  final Color? backgroundColor;
+
+  static const _categoryProps = <CategoryProps>[
+    const CategoryProps(name: 'Length', color: Colors.teal),
+    const CategoryProps(name: 'Area', color: Colors.orange),
+    const CategoryProps(name: 'Volume', color: Colors.pinkAccent),
+    const CategoryProps(name: 'Mass', color: Colors.blueAccent),
+    const CategoryProps(name: 'Time', color: Colors.yellow),
+    const CategoryProps(name: 'Digital Storage', color: Colors.greenAccent),
+    const CategoryProps(name: 'Energy', color: Colors.purpleAccent),
+    const CategoryProps(name: 'Currency', color: Colors.red),
   ];
 
-  static const _baseColors = <Color>[
-    Colors.teal,
-    Colors.orange,
-    Colors.pinkAccent,
-    Colors.blueAccent,
-    Colors.yellow,
-    Colors.greenAccent,
-    Colors.purpleAccent,
-    Colors.red,
-  ];
+  Widget _buildCategories() {
+    final categories = _categoryProps
+        .map((e) => Category(name: e.name, color: e.color, icon: Icons.cake))
+        .toList();
+
+    return ListView.builder(
+      itemCount: categories.length,
+      itemBuilder: (BuildContext context, int index) => categories[index],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Create a list of the eight Categories, using the names and colors
-    // from above. Use a placeholder icon, such as `Icons.cake` for each
-    // Category. We'll add custom icons later.
+    final listView = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      color: backgroundColor,
+      child: _buildCategories(),
+    );
 
-    // TODO: Create a list view of the Categories
-    final listView = Container();
-
-    // TODO: Create an App Bar
-    final appBar = AppBar();
+    final appBar = AppBar(
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: backgroundColor,
+      title: Text(
+        'Unit Converter',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+        ),
+      ),
+    );
 
     return Scaffold(
       appBar: appBar,
