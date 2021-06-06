@@ -48,7 +48,7 @@ class CategoryRoute extends StatelessWidget {
               name: e.name,
               color: e.color,
               icon: Icons.cake,
-              unit: _retrieveUnitList(e.name),
+              units: _retrieveUnitList(e.name),
             ))
         .toList();
 

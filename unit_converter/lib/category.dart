@@ -1,6 +1,7 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
 final _rowHeight = 100.0;
@@ -14,23 +15,38 @@ class Category extends StatelessWidget {
   final String name;
   final ColorSwatch color;
   final IconData icon;
-  final List<Unit> unit;
+  final List<Unit> units;
 
   /// Creates a [Category].
   ///
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
-  const Category(
-      {Key? key,
-      required this.name,
-      required this.color,
-      required this.icon,
-      required this.unit})
-      : super(key: key);
+  const Category({
+    Key? key,
+    required this.name,
+    required this.color,
+    required this.icon,
+    required this.units,
+  }) : super(key: key);
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
-    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => Scaffold(
+          appBar: AppBar(
+            elevation: 1.0,
+            title: Text(
+              name,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            centerTitle: true,
+            backgroundColor: color,
+          ),
+          body: ConverterRoute(units: units, color: color),
+        ),
+      ),
+    );
   }
 
   /// Builds a custom widget that shows [Category] information.
@@ -50,7 +66,7 @@ class Category extends StatelessWidget {
           borderRadius: _borderRadius,
           highlightColor: color,
           splashColor: color,
-          onTap: () => print('I was tapped!'),
+          onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
