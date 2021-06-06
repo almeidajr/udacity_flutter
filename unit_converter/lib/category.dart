@@ -1,6 +1,5 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final _rowHeight = 100.0;
