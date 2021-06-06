@@ -16,11 +16,16 @@ class CategoryProps {
 ///
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
-class CategoryRoute extends StatelessWidget {
+class CategoryRoute extends StatefulWidget {
   final Color? backgroundColor;
 
   const CategoryRoute({Key? key, this.backgroundColor}) : super(key: key);
 
+  @override
+  _CategoryRouteState createState() => _CategoryRouteState();
+}
+
+class _CategoryRouteState extends State<CategoryRoute> {
   static const _categoryProps = <CategoryProps>[
     const CategoryProps(name: 'Length', color: Colors.teal),
     const CategoryProps(name: 'Area', color: Colors.orange),
@@ -43,14 +48,14 @@ class CategoryRoute extends StatelessWidget {
   }
 
   Widget _buildCategories() {
-    final categories = _categoryProps
-        .map((e) => Category(
-              name: e.name,
-              color: e.color,
-              icon: Icons.cake,
-              units: _retrieveUnitList(e.name),
-            ))
-        .toList();
+    final categories = _categoryProps.map((CategoryProps categoryProp) {
+      return Category(
+        name: categoryProp.name,
+        color: categoryProp.color,
+        icon: Icons.cake,
+        units: _retrieveUnitList(categoryProp.name),
+      );
+    }).toList();
 
     return ListView.builder(
       itemCount: categories.length,
@@ -62,14 +67,14 @@ class CategoryRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     final listView = Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      color: backgroundColor,
+      color: widget.backgroundColor,
       child: _buildCategories(),
     );
 
     final appBar = AppBar(
       elevation: 0,
       centerTitle: true,
-      backgroundColor: backgroundColor,
+      backgroundColor: widget.backgroundColor,
       title: Text(
         'Unit Converter',
         style: TextStyle(
