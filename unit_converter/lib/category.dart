@@ -44,6 +44,7 @@ class Category extends StatelessWidget {
               centerTitle: true,
               backgroundColor: color,
             ),
+            resizeToAvoidBottomInset: false,
             body: ConverterRoute(units: units, color: color),
           );
         },
@@ -66,8 +67,8 @@ class Category extends StatelessWidget {
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
-          highlightColor: color,
-          splashColor: color,
+          highlightColor: color['highlight'],
+          splashColor: color['splash'],
           onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: const EdgeInsets.all(8.0),

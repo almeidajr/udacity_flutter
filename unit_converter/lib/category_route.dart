@@ -27,14 +27,63 @@ class CategoryRoute extends StatefulWidget {
 
 class _CategoryRouteState extends State<CategoryRoute> {
   static const _categoryProps = <CategoryProps>[
-    const CategoryProps(name: 'Length', color: Colors.teal),
-    const CategoryProps(name: 'Area', color: Colors.orange),
-    const CategoryProps(name: 'Volume', color: Colors.pinkAccent),
-    const CategoryProps(name: 'Mass', color: Colors.blueAccent),
-    const CategoryProps(name: 'Time', color: Colors.yellow),
-    const CategoryProps(name: 'Digital Storage', color: Colors.greenAccent),
-    const CategoryProps(name: 'Energy', color: Colors.purpleAccent),
-    const CategoryProps(name: 'Currency', color: Colors.red),
+    const CategoryProps(
+      name: 'Length',
+      color: ColorSwatch(0xFF6AB7A8, {
+        'highlight': Color(0xFF6AB7A8),
+        'splash': Color(0xFF0ABC9B),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Area',
+      color: ColorSwatch(0xFFFFD28E, {
+        'highlight': Color(0xFFFFD28E),
+        'splash': Color(0xFFFFA41C),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Volume',
+      color: ColorSwatch(0xFFFFB7DE, {
+        'highlight': Color(0xFFFFB7DE),
+        'splash': Color(0xFFF94CBF),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Mass',
+      color: ColorSwatch(0xFF8899A8, {
+        'highlight': Color(0xFF8899A8),
+        'splash': Color(0xFFA9CAE8),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Time',
+      color: ColorSwatch(0xFFEAD37E, {
+        'highlight': Color(0xFFEAD37E),
+        'splash': Color(0xFFFFE070),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Digital Storage',
+      color: ColorSwatch(0xFF81A56F, {
+        'highlight': Color(0xFF81A56F),
+        'splash': Color(0xFF7CC159),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Energy',
+      color: ColorSwatch(0xFFD7C0E2, {
+        'highlight': Color(0xFFD7C0E2),
+        'splash': Color(0xFFCA90E5),
+      }),
+    ),
+    const CategoryProps(
+      name: 'Currency',
+      color: ColorSwatch(0xFFCE9A9A, {
+        'highlight': Color(0xFFCE9A9A),
+        'splash': Color(0xFFF94D56),
+        'error': Color(0xFF912D2D),
+      }),
+    ),
   ];
 
   List<Unit> _retrieveUnitList(String categoryName) {
