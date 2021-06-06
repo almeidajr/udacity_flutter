@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:unit_converter/category.dart';
+import 'package:unit_converter/unit.dart';
 
 class CategoryProps {
   final String name;
-  final Color color;
+  final ColorSwatch color;
 
   const CategoryProps({required this.name, required this.color});
 }
@@ -16,9 +17,9 @@ class CategoryProps {
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
-  const CategoryRoute({Key? key, this.backgroundColor}) : super(key: key);
-
   final Color? backgroundColor;
+
+  const CategoryRoute({Key? key, this.backgroundColor}) : super(key: key);
 
   static const _categoryProps = <CategoryProps>[
     const CategoryProps(name: 'Length', color: Colors.teal),
@@ -31,9 +32,24 @@ class CategoryRoute extends StatelessWidget {
     const CategoryProps(name: 'Currency', color: Colors.red),
   ];
 
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
   Widget _buildCategories() {
     final categories = _categoryProps
-        .map((e) => Category(name: e.name, color: e.color, icon: Icons.cake))
+        .map((e) => Category(
+              name: e.name,
+              color: e.color,
+              icon: Icons.cake,
+              unit: _retrieveUnitList(e.name),
+            ))
         .toList();
 
     return ListView.builder(
