@@ -8,6 +8,8 @@ void main() => runApp(UnitConverterApp());
 final _backgroundColor = Colors.green[100];
 
 /// This widget is the root of our application.
+/// The first screen we see is a list [Categories], each of which
+/// has a list of [Unit]s.
 class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

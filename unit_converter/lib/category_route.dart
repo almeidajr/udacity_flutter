@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unit_converter/category.dart';
+import 'package:unit_converter/category_tile.dart';
 import 'package:unit_converter/unit.dart';
 
 class CategoryProps {
@@ -96,6 +97,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     });
   }
 
+  void _onCategoryTap(Category category) {}
+
   Widget _buildCategories() {
     final categories = _categoryProps.map((CategoryProps categoryProp) {
       return Category(
@@ -108,7 +111,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
     return ListView.builder(
       itemCount: categories.length,
-      itemBuilder: (BuildContext context, int index) => categories[index],
+      itemBuilder: (BuildContext context, int index) {
+        return CategoryTile(
+          category: categories[index],
+          onTap: _onCategoryTap,
+        );
+      },
     );
   }
 
