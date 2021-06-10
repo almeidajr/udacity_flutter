@@ -16,7 +16,7 @@ class UnitConverter extends StatefulWidget {
 class _UnitConverterState extends State<UnitConverter> {
   late Unit _fromValue;
   late Unit _toValue;
-  late double _inputValue;
+  double _inputValue = 0;
   String _convertedValue = '';
   late List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
@@ -32,15 +32,17 @@ class _UnitConverterState extends State<UnitConverter> {
   void _createDropdownMenuItems() {
     var newItems = <DropdownMenuItem>[];
     for (var unit in widget.category.units) {
-      newItems.add(DropdownMenuItem(
-        value: unit.name,
-        child: Container(
-          child: Text(
-            unit.name,
-            softWrap: true,
+      newItems.add(
+        DropdownMenuItem(
+          value: unit.name,
+          child: Container(
+            child: Text(
+              unit.name,
+              softWrap: true,
+            ),
           ),
         ),
-      ));
+      );
     }
     setState(() {
       _unitMenuItems = newItems;

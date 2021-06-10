@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:unit_converter/category.dart';
-import 'package:unit_converter/unit_converter.dart';
 
 const _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
@@ -11,28 +10,6 @@ class CategoryTile extends StatelessWidget {
 
   const CategoryTile({Key? key, required this.category, required this.onTap})
       : super(key: key);
-
-  void _navigateToConverter(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute<Null>(
-      builder: (BuildContext context) {
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 1.0,
-            title: Text(
-              category.name,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            centerTitle: true,
-            backgroundColor: category.color,
-          ),
-          body: UnitConverter(category: category),
-          // This prevents the attempt to resize the screen when the keyboard
-          // is opened
-          resizeToAvoidBottomInset: false,
-        );
-      },
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +23,7 @@ class CategoryTile extends StatelessWidget {
           splashColor: category.color['splash'],
           // We can use either the () => function() or the () { function(); }
           // syntax.
-          // TODO: This should call the onTap() passed into the constructor
-          onTap: () => _navigateToConverter(context),
+          onTap: () => onTap(category),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(

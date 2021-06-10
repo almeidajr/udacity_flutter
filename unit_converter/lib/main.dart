@@ -5,8 +5,6 @@ import 'package:unit_converter/category_route.dart';
 /// The function that is called when main.dart is run.
 void main() => runApp(UnitConverterApp());
 
-final _backgroundColor = Colors.green[100];
-
 /// This widget is the root of our application.
 /// The first screen we see is a list [Categories], each of which
 /// has a list of [Unit]s.
@@ -23,9 +21,7 @@ class UnitConverterApp extends StatelessWidget {
             ),
         primaryColor: Colors.grey[500],
       ),
-      home: CategoryRoute(
-        backgroundColor: _backgroundColor,
-      ),
+      home: CategoryRoute(),
     );
   }
 }
