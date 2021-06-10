@@ -16,16 +16,28 @@ class UnitConverter extends StatefulWidget {
 class _UnitConverterState extends State<UnitConverter> {
   late Unit _fromValue;
   late Unit _toValue;
-  double _inputValue = 0;
+  double? _inputValue;
   String _convertedValue = '';
   late List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
+  // TODO: Pass this into the TextField so that the input value persists
+  final _inputKey = GlobalKey(debugLabel: 'inputText');
 
   @override
   void initState() {
     super.initState();
     _createDropdownMenuItems();
     _setDefaults();
+  }
+
+  @override
+  void didUpdateWidget(UnitConverter old) {
+    super.didUpdateWidget(old);
+    // We update our [DropdownMenuItem] units when we switch [Categories].
+    if (old.category != widget.category) {
+      _createDropdownMenuItems();
+      _setDefaults();
+    }
   }
 
   /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
@@ -55,6 +67,9 @@ class _UnitConverterState extends State<UnitConverter> {
       _fromValue = widget.category.units[0];
       _toValue = widget.category.units[1];
     });
+    if (_inputValue != null) {
+      _updateConversion();
+    }
   }
 
   /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
@@ -76,7 +91,7 @@ class _UnitConverterState extends State<UnitConverter> {
   void _updateConversion() {
     setState(() {
       _convertedValue =
-          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
+          _format(_inputValue! * (_toValue.conversion / _fromValue.conversion));
     });
   }
 
@@ -216,6 +231,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ),
     );
 
+    // TODO: Use a ListView instead of a Column
     final converter = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -225,6 +241,8 @@ class _UnitConverterState extends State<UnitConverter> {
       ],
     );
 
+    // TODO: Use an OrientationBuilder to add a width to the unit converter
+    // in landscape mode
     return Padding(
       padding: _padding,
       child: converter,
