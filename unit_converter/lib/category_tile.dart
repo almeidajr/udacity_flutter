@@ -7,12 +7,12 @@ final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 class CategoryTile extends StatelessWidget {
   final Category category;
-  final ValueChanged<Category> onTap;
+  final ValueChanged<Category>? onTap;
 
   const CategoryTile({
     Key? key,
     required this.category,
-    required this.onTap,
+    this.onTap,
     // TODO: You may want to pass in a null onTap when the Currency [Category]
     // is in a loading or error state. In build(), you'll want to update the UI
     // accordingly.
@@ -30,7 +30,7 @@ class CategoryTile extends StatelessWidget {
           splashColor: category.color['splash'],
           // We can use either the () => function() or the () { function(); }
           // syntax.
-          onTap: () => onTap(category),
+          onTap: onTap == null ? null : () => onTap!(category),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
