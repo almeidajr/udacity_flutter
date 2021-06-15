@@ -1,11 +1,13 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
-import 'package:unit_converter/unit.dart';
+
+import 'unit.dart';
 
 class Category {
   final String name;
   final ColorSwatch color;
+  // TODO: Change this to a String path to the image asset
   final IconData icon;
   final List<Unit> units;
 

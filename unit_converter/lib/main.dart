@@ -1,6 +1,7 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
-import 'package:unit_converter/category_route.dart';
+
+import 'category_route.dart';
 
 /// The function that is called when main.dart is run.
 void main() => runApp(UnitConverterApp());
@@ -15,6 +16,7 @@ class UnitConverterApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
       theme: ThemeData(
+        // TODO: fill in the fontFamily property
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Colors.black,
               displayColor: Colors.grey[600],

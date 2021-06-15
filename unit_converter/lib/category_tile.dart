@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unit_converter/category.dart';
+
+import 'category.dart';
 
 const _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
@@ -35,6 +36,7 @@ class CategoryTile extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(16.0),
+                  // TODO: Use an Image instead of an Icon
                   child: Icon(
                     category.icon,
                     size: 60.0,

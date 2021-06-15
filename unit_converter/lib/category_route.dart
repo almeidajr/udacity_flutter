@@ -2,11 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:unit_converter/backdrop.dart';
-import 'package:unit_converter/category.dart';
-import 'package:unit_converter/category_tile.dart';
-import 'package:unit_converter/unit.dart';
-import 'package:unit_converter/unit_converter.dart';
+
+import 'backdrop.dart';
+import 'category.dart';
+import 'category_tile.dart';
+import 'unit.dart';
+import 'unit_converter.dart';
 
 class CategoryProps {
   final String name;
@@ -69,6 +70,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       'error': Color(0xFF912D2D),
     }),
   ];
+  // TODO: Add image asset paths here
 
   @override
   Future<void> didChangeDependencies() async {
@@ -100,6 +102,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         name: key,
         units: units,
         color: _baseColors[categoryIndex],
+        // TODO: Replace the placeholder icon with an icon image path
         icon: Icons.cake,
       );
 
