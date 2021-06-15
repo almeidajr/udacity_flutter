@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:unit_converter/backdrop.dart';
 import 'package:unit_converter/category.dart';
@@ -30,7 +33,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   late Category _defaultCategory;
   Category? _currentCategory;
   late List<Category> _categories;
-
+  // TODO: _categoryNames will be retrieved from the JSON asset
   static const _categoryProps = <CategoryProps>[
     const CategoryProps(
       name: 'Length',
@@ -91,6 +94,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     ),
   ];
 
+  // TODO: Remove the overriding of initState(). Instead, we use
+  // didChangeDependencies()
   @override
   void initState() {
     super.initState();
@@ -105,6 +110,33 @@ class _CategoryRouteState extends State<CategoryRoute> {
     _defaultCategory = _categories.first;
   }
 
+  // TODO: Uncomment this out. We use didChangeDependencies() so that we can
+  // wait for our JSON asset to be loaded in (async).
+  //  @override
+  //  Future<void> didChangeDependencies() async {
+  //    super.didChangeDependencies();
+  //    // We have static unit conversions located in our
+  //    // assets/data/regular_units.json
+  //    if (_categories.isEmpty) {
+  //      await _retrieveLocalCategories();
+  //    }
+  //  }
+
+  /// Retrieves a list of [Categories] and their [Unit]s
+  Future<void> _retrieveLocalCategories() async {
+    // Consider omitting the types for local variables. For more details on Effective
+    // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
+    final json = DefaultAssetBundle.of(context)
+        .loadString('assets/data/regular_units.json');
+    final data = JsonDecoder().convert(await json);
+    if (data is! Map) {
+      throw ('Data retrieved from API is not a Map');
+    }
+    // TODO: Create Categories and their list of Units, from the JSON asset
+  }
+
+  // TODO: Delete this function; instead, read in the units from the JSON asset
+  // inside _retrieveLocalCategories()
   List<Unit> _retrieveUnitList(String categoryName) {
     return List.generate(10, (int i) {
       i += 1;
@@ -152,6 +184,19 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   @override
   Widget build(BuildContext context) {
+    if (_categories.isEmpty) {
+      return Center(
+        child: Container(
+          height: 180.0,
+          width: 180.0,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    // Based on the device size, figure out how to best lay out the list
+    // You can also use MediaQuery.of(context).size to calculate the orientation
+    assert(debugCheckHasMediaQuery(context));
     final listView = Padding(
       padding: const EdgeInsets.only(
         left: 8.0,
