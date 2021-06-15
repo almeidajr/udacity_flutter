@@ -88,6 +88,8 @@ class _UnitConverterState extends State<UnitConverter> {
     return outputNum;
   }
 
+  // TODO: If in the Currency [Category], call the API to retrieve the conversion.
+  // Remember, the API call is an async function.
   void _updateConversion() {
     setState(() {
       _convertedValue =

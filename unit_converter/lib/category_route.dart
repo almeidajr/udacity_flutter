@@ -88,6 +88,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // assets/data/regular_units.json
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
+      // TODO: Call _retrieveApiCategory() here
     }
   }
 
@@ -124,6 +125,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
       categoryIndex += 1;
     });
   }
+
+  // TODO: Add the Currency Category retrieved from the API, to our _categories
+  /// Retrieves a [Category] and its [Unit]s from an API on the web
+  Future<void> _retrieveApiCategory() async {}
 
   /// Function to call when a [Category] is tapped.
   void _onCategoryTap(Category category) {
