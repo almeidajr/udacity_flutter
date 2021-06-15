@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'api.dart';
 import 'category.dart';
 import 'unit.dart';
 
@@ -88,13 +89,27 @@ class _UnitConverterState extends State<UnitConverter> {
     return outputNum;
   }
 
-  // TODO: If in the Currency [Category], call the API to retrieve the conversion.
-  // Remember, the API call is an async function.
-  void _updateConversion() {
-    setState(() {
-      _convertedValue =
-          _format(_inputValue! * (_toValue.conversion / _fromValue.conversion));
-    });
+  Future<void> _updateConversion() async {
+    if (_inputValue == null) {
+      return;
+    }
+
+    if (widget.category.name == apiCategory['name']) {
+      final api = Api();
+      final conversion = await api.convert(apiCategory['route']!,
+          _inputValue.toString(), _fromValue.name, _toValue.name);
+
+      if (conversion != null) {
+        setState(() {
+          _convertedValue = _format(conversion);
+        });
+      }
+    } else {
+      setState(() {
+        _convertedValue = _format(
+            _inputValue! * (_toValue.conversion / _fromValue.conversion));
+      });
+    }
   }
 
   void _updateInputValue(String? input) {
