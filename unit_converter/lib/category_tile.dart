@@ -9,8 +9,14 @@ class CategoryTile extends StatelessWidget {
   final Category category;
   final ValueChanged<Category> onTap;
 
-  const CategoryTile({Key? key, required this.category, required this.onTap})
-      : super(key: key);
+  const CategoryTile({
+    Key? key,
+    required this.category,
+    required this.onTap,
+    // TODO: You may want to pass in a null onTap when the Currency [Category]
+    // is in a loading or error state. In build(), you'll want to update the UI
+    // accordingly.
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

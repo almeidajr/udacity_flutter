@@ -23,6 +23,7 @@ class _UnitConverterState extends State<UnitConverter> {
   late List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
   final _inputKey = GlobalKey(debugLabel: 'inputText');
+  // TODO: Add a flag for whether to show error UI
 
   @override
   void initState() {
@@ -99,6 +100,7 @@ class _UnitConverterState extends State<UnitConverter> {
       final conversion = await api.convert(apiCategory['route']!,
           _inputValue.toString(), _fromValue.name, _toValue.name);
 
+      // TODO: Check whether to show an error UI
       if (conversion != null) {
         setState(() {
           _convertedValue = _format(conversion);
@@ -189,6 +191,8 @@ class _UnitConverterState extends State<UnitConverter> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Build an error UI
+
     final input = Padding(
       padding: _padding,
       child: Column(
