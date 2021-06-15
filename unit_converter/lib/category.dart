@@ -7,8 +7,7 @@ import 'unit.dart';
 class Category {
   final String name;
   final ColorSwatch color;
-  // TODO: Change this to a String path to the image asset
-  final IconData icon;
+  final String icon;
   final List<Unit> units;
 
   /// Information about a [Category].
